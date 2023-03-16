@@ -1,5 +1,4 @@
 import numpy as np
-
 import time
 
 def ct_fft(x):
@@ -35,6 +34,7 @@ def radix2_fft(x):
         return X
 
 def bluestein_fft(x):
+    """Compute the FFT of a sequence using the Bluestein's algorithm."""
     N = len(x)
     M = 2 * N - 1
     next_pow2 = int(2**np.ceil(np.log2(M)))
@@ -45,6 +45,7 @@ def bluestein_fft(x):
     return y_padded[:N]
 
 def prime_factor_fft(x):
+    """Compute the FFT of a sequence using the Prime Factor algorithm."""
     N = len(x)
     factors = get_prime_factors(N)
     y = np.copy(x)
@@ -70,34 +71,32 @@ def get_prime_factors(n):
 for N in [2 ** n for n in range(10, 15)]:
     x = np.random.rand(N) + 1j * np.random.rand(N)
 
+    # Time the execution of Cooley-Tukey Algorithm
+    start_time = time.time()
+    y_ct = ct_fft(x)
+    end_time = time.time()
+    ct_time = end_time - start_time
+    # Time the execution of Radix2 Algorithm
+    start_time = time.time()
+    y_radix2 = radix2_fft(x)
+    end_time = time.time()
+    radix2_time = end_time - start_time
     # Time the execution of Bluestein's Algorithm
     start_time = time.time()
     y_bluestein = bluestein_fft(x)
     end_time = time.time()
     bluestein_time = end_time - start_time
-
     # Time the execution of Prime Factor Algorithm
     start_time = time.time()
     y_prime_factor = prime_factor_fft(x)
     end_time = time.time()
     prime_factor_time = end_time - start_time
 
-    # Time the execution of Radix2 Algorithm
-    start_time = time.time()
-    y_radix2 = radix2_fft(x)
-    end_time = time.time()
-    radix2_time = end_time - start_time
-
-    # Time the execution of Cooley-Tukey Algorithm
-    start_time = time.time()
-    y_ct = ct_fft(x)
-    end_time = time.time()
-    ct_time = end_time - start_time
 
 
-    print(f"N = {N}, Cooley-Turkey  FFT time = {ct_time:.6f}")
-    print(f"N = {N}, Radix2  FFT time = {radix2_time:.6f}")
-    print(f"N = {N}, Bluestein's Algorithm  FFT time = {bluestein_time:.6f}")
-    print(f"N = {N}, Prime Factor Algorithm  time = {prime_factor_time:.6f}")
+    print(f"N = {N}, Cooley-Turkey FFT time = {ct_time:.6f}")
+    print(f"N = {N}, Radix2 FFT time = {radix2_time:.6f}")
+    print(f"N = {N}, Bluestein's Algorithm FFT time = {bluestein_time:.6f}")
+    print(f"N = {N}, Prime Factor Algorithm FFT time = {prime_factor_time:.6f}")
 
 
