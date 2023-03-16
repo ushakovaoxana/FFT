@@ -94,9 +94,9 @@ for N in [2 ** n for n in range(10, 15)]:
 
 
 
-    print(f"N = {N}, Cooley-Turkey FFT time = {ct_time:.6f}")
-    print(f"N = {N}, Radix2 FFT time = {radix2_time:.6f}")
-    print(f"N = {N}, Bluestein's Algorithm FFT time = {bluestein_time:.6f}")
-    print(f"N = {N}, Prime Factor Algorithm FFT time = {prime_factor_time:.6f}")
+    print(f"N = {N}, Cooley-Turkey FFT time = {ct_time}")
+    print(f"N = {N}, Radix2 FFT time = {radix2_time}")
+    print(f"N = {N}, Bluestein's Algorithm FFT time = {bluestein_time}")
+    print(f"N = {N}, Prime Factor Algorithm FFT time = {prime_factor_time}")
 
 
